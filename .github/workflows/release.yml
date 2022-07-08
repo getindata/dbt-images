@@ -46,7 +46,7 @@ jobs:
       - name: Build ${{ steps.tag-info.outputs.IMAGE_NAME }}
         uses: docker/build-push-action@v2
         with:
-          context: ${{ steps.tag-info.outputs.IMAGE_NAME }}
+          context: ./
           builder: ${{ steps.buildx.outputs.name }}
           target: ${{ matrix.platform }}
           push: true

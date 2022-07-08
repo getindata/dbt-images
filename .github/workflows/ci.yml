@@ -3,9 +3,6 @@ name: Build dbt image
 on:
   pull_request:
     branches: [ main, develop ]
-  push:
-    tags:
-      - 'dbt-dataops-*.*.*'
 
 jobs:
   buildx:
@@ -44,9 +41,10 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           target: ${{ matrix.platform }}
           push: true
-          tags: gcr.io/getindata-images-public/dbt-dataops:${{ matrix.platform }}-${{ github.sha }}
+          tags: gcr.io/getindata-images-public/dbt-dataops:${{ matrix.platform }}-${{ github.sha }},gcr.io/getindata-images-public/dbt-dataops:${{ matrix.platform }}-latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
+
       - name: Move cache
         run: |
           rm -rf /tmp/.buildx-cache
