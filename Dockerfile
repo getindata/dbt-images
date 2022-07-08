@@ -1,4 +1,4 @@
-FROM python:3.8-slim-bullseye
+FROM python:3.8-slim-bullseye as base
 
 # System setup
 RUN apt-get update \
@@ -28,11 +28,16 @@ ENV LANG=C.UTF-8
 # Update python
 RUN pip install --upgrade pip setuptools wheel --no-cache-dir
 # Install packages
-COPY requirements.txt .
+COPY requirements/requirements.txt ./
 RUN pip install -r requirements.txt
 
 WORKDIR /dbt
 ADD ./cmd_executor.sh /dbt/
 RUN chmod +x /dbt/cmd_executor.sh
 ENTRYPOINT ["/dbt/cmd_executor.sh"]
+
+FROM base as gcp-image
+COPY requirements/requirements-gcp.txt ./
+RUN pip install -r requirements-gcp.txt
+
 

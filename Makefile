@@ -1,4 +1,4 @@
-build:
-	docker build -t dbt-base .
+build-gcp:
+	docker build --target gcp-image -t dbt-base .  
 
-.PHONY: build
+.PHONY: build-gcp
