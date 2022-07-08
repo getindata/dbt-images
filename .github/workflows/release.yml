@@ -50,7 +50,7 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           target: ${{ matrix.platform }}
           push: true
-          tags: gcr.io/getindata-images-public/dbt-${{ steps.tag-info.outputs.IMAGE_NAME }}:${{ matrix.platform }}-${{ steps.tag-info.outputs.IMAGE_VERSION }},gcr.io/getindata-images-public/cicd-${{ steps.tag-info.outputs.IMAGE_NAME }}:${{ matrix.platform }}-latest
+          tags: gcr.io/getindata-images-public/${{ steps.tag-info.outputs.IMAGE_NAME }}:${{ matrix.platform }}-${{ steps.tag-info.outputs.IMAGE_VERSION }},gcr.io/getindata-images-public/${{ steps.tag-info.outputs.IMAGE_NAME }}:${{ matrix.platform }}-latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
