@@ -50,10 +50,10 @@ jobs:
           target: ${{ matrix.platform }}
           push: true
           tags: gcr.io/getindata-images-public/${{ steps.tag-info.outputs.IMAGE_NAME }}:${{ matrix.platform }}-${{ steps.tag-info.outputs.IMAGE_VERSION }},gcr.io/getindata-images-public/${{ steps.tag-info.outputs.IMAGE_NAME }}:${{ matrix.platform }}-latest
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
+      #     cache-from: type=local,src=/tmp/.buildx-cache
+      #     cache-to: type=local,dest=/tmp/.buildx-cache-new
 
-      - name: Move cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+      # - name: Move cache
+      #   run: |
+      #     rm -rf /tmp/.buildx-cache
+      #     mv /tmp/.buildx-cache-new /tmp/.buildx-cache
