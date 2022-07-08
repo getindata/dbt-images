@@ -36,7 +36,7 @@ ADD ./cmd_executor.sh /dbt/
 RUN chmod +x /dbt/cmd_executor.sh
 ENTRYPOINT ["/dbt/cmd_executor.sh"]
 
-FROM base as gcp-image
+FROM base as gcp
 COPY requirements/requirements-gcp.txt ./
 RUN pip install -r requirements-gcp.txt
 
