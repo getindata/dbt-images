@@ -3,14 +3,14 @@ name: Build & Publish dbt images
 on:
   push:
     tags:
-      - 'dbt-dataops-*.*.*'
+      - "dbt-dataops-*.*.*"
 
 jobs:
   docker:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-          platform: [gcp, aws]
+        platform: [gcp, aws]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -28,13 +28,7 @@ jobs:
           IMAGE_VERSION=`echo $TAG_NAME | sed -e's/\(.*\)-\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\)\+/\2/'`
           echo "::set-output name=IMAGE_NAME::$IMAGE_NAME"
           echo "::set-output name=IMAGE_VERSION::$IMAGE_VERSION"
-      - name: Cache Docker layers
-        uses: actions/cache@v2
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx
+
       - name: Login to GCR
         uses: docker/login-action@v1
         with:
@@ -50,10 +44,5 @@ jobs:
           target: ${{ matrix.platform }}
           push: true
           tags: gcr.io/getindata-images-public/${{ steps.tag-info.outputs.IMAGE_NAME }}:${{ matrix.platform }}-${{ steps.tag-info.outputs.IMAGE_VERSION }},gcr.io/getindata-images-public/${{ steps.tag-info.outputs.IMAGE_NAME }}:${{ matrix.platform }}-latest
-      #     cache-from: type=local,src=/tmp/.buildx-cache
-      #     cache-to: type=local,dest=/tmp/.buildx-cache-new
-
-      # - name: Move cache
-      #   run: |
-      #     rm -rf /tmp/.buildx-cache
-      #     mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
