@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - platform: gcp
+          - platform: [gcp, aws]
     steps:
       - name: Checkout
         uses: actions/checkout@v2

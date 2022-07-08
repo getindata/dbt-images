@@ -40,4 +40,6 @@ FROM base as gcp
 COPY requirements/requirements-gcp.txt ./
 RUN pip install -r requirements-gcp.txt
 
-
+FROM base as aws
+COPY requirements/requirements-aws.txt ./
+RUN pip install -r requirements-aws.txt
