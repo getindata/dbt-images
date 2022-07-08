@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        include:
-          - platform: [gcp, aws]
+          platform: [gcp, aws]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
