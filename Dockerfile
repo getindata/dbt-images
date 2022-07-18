@@ -31,8 +31,8 @@ RUN pip install --upgrade pip setuptools wheel --no-cache-dir \
   -r requirements.txt
 
 WORKDIR /dbt
-ADD ./cmd_executor.sh /dbt/
-RUN chmod +x /dbt/cmd_executor.sh
+ADD ./executor_with_test_reports_ingestions.sh /dbt/
+RUN chmod +x /dbt/executor_with_test_reports_ingestions.sh
 
 FROM base as gcp
 COPY requirements/requirements-gcp.txt ./
