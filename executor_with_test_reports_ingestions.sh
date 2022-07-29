@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 array_args=("$@")
 echo 'Executing DBT with following parameters:' "${array_args[@]}"
 dbt "${array_args[@]}"
