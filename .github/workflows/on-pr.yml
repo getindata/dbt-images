@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.PUBLIC_GCR_DEPLOY_SA_KEY }}
 
       - name: Build image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: ./
           builder: ${{ steps.buildx.outputs.name }}
