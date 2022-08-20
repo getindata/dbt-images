@@ -1,4 +1,4 @@
-FROM python:3.8-slim-bullseye as base
+FROM python:3.10-slim-bullseye as base
 
 # System setup
 RUN apt-get update \
