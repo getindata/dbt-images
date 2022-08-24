@@ -1,2 +1,2 @@
-acryl-datahub[dbt]==0.8.43.2
+acryl-datahub[dbt]==0.8.43.3
 dbt-core==1.2.0
