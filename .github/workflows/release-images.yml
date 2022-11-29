@@ -8,9 +8,6 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        platform: [gcp, aws]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -47,9 +44,8 @@ jobs:
         with:
           context: ./
           builder: ${{ steps.buildx.outputs.name }}
-          target: ${{ matrix.platform }}
           push: true
-          tags: gcr.io/getindata-images-public/${{ steps.tag-info.outputs.IMAGE_NAME }}:${{ matrix.platform }}-${{ steps.tag-info.outputs.IMAGE_VERSION }},gcr.io/getindata-images-public/${{ steps.tag-info.outputs.IMAGE_NAME }}:${{ matrix.platform }}-latest
+          tags: gcr.io/getindata-images-public/${{ steps.tag-info.outputs.IMAGE_NAME }}:${{ steps.tag-info.outputs.IMAGE_VERSION }},gcr.io/getindata-images-public/${{ steps.tag-info.outputs.IMAGE_NAME }}:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 

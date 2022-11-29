@@ -6,9 +6,6 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        platform: [gcp, aws]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -36,6 +33,5 @@ jobs:
         with:
           context: ./
           builder: ${{ steps.buildx.outputs.name }}
-          target: ${{ matrix.platform }}
           push: true
-          tags: gcr.io/getindata-images-public/dbt-dataops:${{ matrix.platform }}-${{ github.sha }}
+          tags: gcr.io/getindata-images-public/dbt-dataops:${{ github.sha }}
