@@ -1,6 +1,5 @@
 acryl-datahub[dbt]==0.10.4
 dbt-core==1.5.4
-dbt-spark==1.5.2
 dbt-bigquery==1.5.5
 dbt-postgres==1.5.4
 dbt-snowflake==1.5.2
